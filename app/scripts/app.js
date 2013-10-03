@@ -1,7 +1,12 @@
 'use strict';
 
-angular.module('ordioApp', [])
-  .config(function ($routeProvider) {
+angular.module('ordioApp', ['ngRoute', 'ngAnimate', 'ngSanitize'])
+  .config(function ($routeProvider, $httpProvider) {
+
+    // cross-domain ajax requests
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',

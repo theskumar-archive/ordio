@@ -1,0 +1,303 @@
+.transition{
+    $transitionDuration: 2s;
+    transition-duration: $transitionDuration;
+    -webkit-transition-duration: $transitionDuration; /* Safari */
+}
+
+body{
+    background-color: #3B3B3C;
+    color: white;
+}
+
+.outer{
+    width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+.loading{
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 0px;
+    font-size: 36px;
+    font-style: italic;
+
+    div.logo{
+        background: url("../images/logo.png") center no-repeat;
+        width: 500px;
+        height: 500px;
+        margin: auto;
+    }
+}
+
+.content{
+    margin: auto;
+    text-align: center;
+}
+
+.blurred{
+    $blur: 10px;
+    -webkit-filter: blur($blur);
+    -moz-filter: blur($blur);
+    -o-filter: blur($blur);
+    -ms-filter: blur($blur);
+    filter: blur($blur);
+    opacity: 0.6;
+}
+
+.topbar{
+    float: right;
+    width: 100%;
+    top: 20px;
+    height: 100px;
+    position: relative;
+
+    div.blank{
+        width: 75%;
+        float: left;
+        height: 50px;
+    }
+
+    div.menu{
+        float: right;
+        height: 50px;
+        color: #868478;
+
+        ul{
+            position: relative;
+            list-style: none;
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+
+            li{
+                padding: 10px;
+                float: left;
+                line-height: 30px;
+                cursor: pointer;
+
+                img{
+                    width: 30px;
+                    height: 30px;
+                }
+
+                &#server{
+                    line-height: 28px;
+                    border: 1px solid #565657;
+                    background-color: #3D3536;
+                    border-radius: 20px;
+                }
+            }
+        }
+    }
+
+    div.overlay{
+        clear: both;
+        float: right;
+        position: relative;
+        width: 300px;
+        margin-top: 10px;
+        z-index: 998;
+
+        ul.playlist{
+            padding: 0px;
+            width: 100%;
+            max-height: 500px;
+            overflow: scroll;
+            list-style: none;
+            float: right;
+            text-align: center;
+            border-radius: 5px;
+
+            li{
+                border-bottom: 1px solid #565657;
+                padding: 5px;
+                padding-bottom: 0px;
+                position: relative;
+                width: 100%;
+                background-color: #3D3536;
+                border: 1px solid #565657;
+
+                &.current{
+                background-color: white;
+                color: black;
+                }
+
+                span.title{
+                    font-size: 20px;
+                    overflow: hidden;
+                }
+
+                span.subtitle{
+                    position: relative;
+                    top: -10px;
+                    font-size: 12px;
+                    overflow: hidden;
+                }
+
+                &:last-child{
+                    border-bottom: none;
+                }
+
+            }
+        }
+
+        div.instructions{
+            padding: 10px;
+            width: 100%;
+            list-style: none;
+            float: right;
+            text-align: justify;
+            background-color: #3D3536;
+            border: 1px solid #565657;
+            border-radius: 5px;
+        }
+    }
+}
+
+.center{
+    clear: both;
+    width: 100%;
+    height: 400px;
+    min-height: 400px;
+    position: relative;
+
+    div.logo{
+        background: url("../images/logo.png") center no-repeat;
+        position: relative;
+        width: 30%;
+        height: 100%;
+        float: left;
+    }
+
+
+    div.search{
+        position: relative;
+        width: 70%;
+        height: 400px;
+        text-align: left;
+        float: left;
+
+        input{
+            position: relative;
+            top: 175px;
+            width: 600px;
+            height: 50px;
+            border: 1px solid #565657;
+            color: #868478;
+            background: url("../images/search-icon.png") 10px center no-repeat;
+            background-size: 30px;
+            background-color: #2C2C2D;
+            padding-left: 50px;
+
+            &:hover{
+                box-shadow: 0 0 10px #777777;
+                border: 1px solid white;
+            }
+
+            &:focus{
+                outline: none;
+                box-shadow: 0 0 10px #777777;
+                border: 1px solid white;
+            }
+        }
+
+        ul.results{
+            position: relative;
+            top: 160px;
+            width: 600px;
+            height: 100%;
+            padding: 0px 20px;
+            list-style: none;
+            overflow: scroll;
+            z-index: 999;
+            color: #867878;
+
+            li{
+                position: relative;
+                background-color: #3D3536;
+                border: 1px solid #565657;
+                padding: 0px 10px;
+                height: 50px;
+                overflow: hidden;
+                line-height: 50px;
+
+                div.track{
+                    position: relative;
+                    left: 0px;
+                    width: 425px;
+
+                    span.title{
+                        font-size: 20px;
+                        overflow: hidden;
+                    }
+
+                    span.subtitle{
+                        margin-left: 20px;
+                        font-size: 12px;
+                        overflow: hidden;
+                    }
+                }
+
+                div.add{
+                    width: 100px;
+                    color: #949180;
+                    height: 30px;
+                    line-height: 28px;
+                    padding: 0px 5px;
+                    position: absolute;
+                    top: 8px;
+                    right: 5px;
+                    background-color: #3A362D;
+                    border: 1px solid #565657;
+                    border-radius: 20px;
+                    font-size: 14px;
+                    cursor: pointer;
+                    text-align: center;
+
+                    &:hover{
+                        box-shadow: 0 0 10px white;
+                    }
+                }
+
+                &:hover{
+                    background-color: #2C2C2D;
+                }
+            }
+        }
+    }
+}
+
+.bottom{
+    clear: both;
+    width: 100%;
+    position: relative;
+    text-align: center;
+
+    div.nowplaying{
+        display: inline-block;
+        width: 600px;
+        height: 100px;
+        background: url("../images/nowplaying.png") 0px center no-repeat;
+        position: relative;
+        padding-left: 100px;
+
+        span.title{
+            display: block;
+            position: relative;
+            font-size: 36px;
+            height: 60px;
+            overflow: hidden;
+        }
+
+        span.subtitle{
+            position: relative;
+            top: -20px;
+            font-size: 18px;
+            height: 40px;
+        }
+    }
+}

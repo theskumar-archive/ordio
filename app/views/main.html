@@ -1,9 +1,61 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
+<div class="loading" ng-hide="loaded">
+        <div class="logo">
+        </div>
+        <span>connecting .... </span>
+</div>
+<div class="content blurred transition" ng-class="{blurred: !loaded}">
+    <div class="topbar">
+            <div class="blank"></div>
+            <div class="menu">
+                <ul>
+                    <li><img src="images/playlist.png" alt="Playlist" ng-click="showPlaylist = !showPlaylist"></li>
+                    <li><img src="images/mute.png" alt="Mute" ng-click="showInstructions = !showInstructions"></li>
+                    <li id="server" ng-show="data.server.config.streamip">{{data.server.config.streamip}}</li>
+                </ul>
+            </div>
+            <div class="overlay fade-show" ng-show="showPlaylist">
+                <ul class="playlist">
+                    <li ng-repeat="track in data.server.playlist" ng-class="{current: data.server.currentTrack.Pos == track.Pos}">
+                        <span class="title" ng-if="track.Title">{{track.Title}}<br></span>
+                        <span class="title" ng-if="!track.Title">&lt; no title &gt;<br></span>
+                        <span class="subtitle" ng-if="track.Artist">{{track.Artist}}<br></span>
+                        <span class="subtitle" ng-if="!track.Artist">&lt; no artist &gt;<br></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="overlay fade-show" ng-show="showInstructions">
+                <div class="instructions">
+                    You can use any web player like vlc, itune or broswer to join the stream at the above url. In vlc, goto File > open network... > enter url > open.
+                </div>
+            </div>
+    </div>
+    <div class="center">
+        <div class="logo"></div>
+        <div class="search">
+            <input type="text" ng-model="userQuery" ng-focus="userQuery = null">
+                <ul class="results" ng-show="query">
+                    <li class="fade-repeat" ng-repeat="track in filteredTracks | filter:query">
+                        <div class="track">
+                            <span class="title">{{track.Title}}</span>
+                            <span class="title" ng-hide="track.Title">{{track.file}}</span>
+                            <span class="subtitle"> {{track.Artist}} | {{track.Album}}</span>
+                        </div>
+                        <div class="add" ng-click="add(track)"> add to queue </div>
+                    </li>
+                </ul>
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        <div ng-switch on="data.server.config.state">
+            <div class="nowplaying" ng-switch-when="play">
+                <span class="title">{{data.server.currentTrack.Title}}</span>
+                <br>
+                <span class="subtitle"> {{data.server.currentTrack.Album}} - {{data.server.currentTrack.Artist}}</span>
+            </div>
+            <div class="nowplaying" ng-switch-when="stop"><span class="title">stream stopped / paused</span><br><span class="subtitle" style="cursor:pointer" ng-click="control('play')"> add to playlist &amp; [click to resume]</span></div>
+            <div class="nowplaying" ng-switch-default><span class="title">connecting ....</span><br><span class="subtitle"> [ please wait / check server status ]</span></div>
+        </div>
+    </div>
 </div>
