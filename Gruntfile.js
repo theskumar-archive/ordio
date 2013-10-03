@@ -37,6 +37,10 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
       },
+      compass: {
+          files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+          tasks: ['compass:server', 'autoprefixer']
+      },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['copy:styles', 'autoprefixer']
@@ -68,7 +72,8 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost'
+        // Change this to 'localhost' to access the server from outside.
+        hostname: '0.0.0.0'
       },
       livereload: {
         options: {
@@ -151,6 +156,31 @@ module.exports = function (grunt) {
           ext: '.js'
         }]
       }
+    },
+    compass: {
+        options: {
+            sassDir: '<%= yeoman.app %>/styles',
+            cssDir: '.tmp/styles',
+            generatedImagesDir: '.tmp/images/generated',
+            imagesDir: '<%= yeoman.app %>/images',
+            javascriptsDir: '<%= yeoman.app %>/scripts',
+            fontsDir: '<%= yeoman.app %>/styles/fonts',
+            importPath: '<%= yeoman.app %>/bower_components',
+            httpImagesPath: '/images',
+            httpGeneratedImagesPath: '/images/generated',
+            httpFontsPath: '/styles/fonts',
+            relativeAssets: false
+        },
+        dist: {
+            options: {
+                generatedImagesDir: '<%= yeoman.dist %>/images/generated'
+            }
+        },
+        server: {
+            options: {
+                debugInfo: true
+            }
+        }
     },
     // not used since Uglify task does concat,
     // but still available if needed
@@ -269,6 +299,7 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
+        'compass',
         'coffee:dist',
         'copy:styles'
       ],
@@ -277,6 +308,7 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       dist: [
+        'compass',
         'coffee',
         'copy:styles',
         'imagemin',
