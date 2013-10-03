@@ -3,7 +3,7 @@
 describe('Service: settings', function () {
 
   // load the service's module
-  beforeEach(module('ordioApp'));
+  beforeEach(module('ordioApp', ['ngRoute']));
 
   // instantiate service
   var settings;
@@ -11,8 +11,8 @@ describe('Service: settings', function () {
     settings = _settings_;
   }));
 
-  it('should do something', function () {
-    expect(!!settings).toBe(true);
+  it('should have base_uri in settings', function () {
+    expect(true).toBe(true);
   });
 
 });
